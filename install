@@ -20,31 +20,62 @@ echo "Creating tables...\r\n";
 // Wait a little bit to see what is happening
 sleep(2);
 
-// Insert table in the database
+// Insert products table in the database
 $products_table = "CREATE TABLE products( ".
     "product_id INT NOT NULL AUTO_INCREMENT, ".
     "product_title VARCHAR(255) NOT NULL, ".
     "product_description TEXT NOT NULL, ".
+    "product_category VARCHAR(255), ".
     "items_available INT, ".
     "PRIMARY KEY ( product_id )) " .
     "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 if ($mysqli->query($products_table)) {
-    echo "Table products created successfully.\r\n\r\n";
+    echo "Table products created successfully.\r\n";
+}
+
+// Insert category table in the database
+$category_table = "CREATE TABLE category( ".
+    "category_id INT NOT NULL AUTO_INCREMENT, ".
+    "category_title VARCHAR(255) NOT NULL, ".
+    "PRIMARY KEY ( category_id )) " .
+    "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+if ($mysqli->query($category_table)) {
+    echo "Table category created successfully.\r\n\r\n";
 }
 
 echo "Importing data into tables...\r\n";
 sleep(2);
 
+// Import product categories
+$stmt = $mysqli->prepare("INSERT INTO category (category_title) VALUES (?)");
+
+// Man's shirts category
+$category_title = 'Man\'s Shirts';
+$stmt->bind_param('s', $category_title);
+if ($stmt->execute()) {
+    echo "Category Man\'s Shirts has been successfully imported into database.\r\n";
+}
+
+// Men's pants category
+$category_title = 'Men\'s Pants';
+$stmt->bind_param('s', $category_title);
+if ($stmt->execute()) {
+    echo "Category Men\'s Pants has been successfully imported into database.\r\n";
+}
+
 // List of the products
 $product_rows = [
-    ['Red Shirt', 'Red shirt 100% cotton.', 15],
-    ['Blue Shirt', 'Original blue shirt.', 6],
-    ['Men\'s V-Neck Shirt', 'V-neck shirt from a new collection.', 11]
+    ['New Look long sleeve poplin shirt in white', 'Resistant to wrinkling and easier to iron.', 1, 15],
+    ['Topman quilted overshirt in black', 'Smooth woven fabric.', 1, 6],
+    ['Men\'s V-Neck Shirt', 'V-neck shirt from a new collection.', 1, 11],
+    ['Straight Fit Pants', 'Straight fit pants. Five pockets. Washed effect.', 2, 43],
+    ['Tapered Fit Pants', 'Pants with elastic waistband. Front pockets and back patch pockets.', 2, 11],
+    ['Cargo Pants', 'Pants made of textured cotton fabric. Front patch pockets and back welt pockets. Multi-functional pockets at legs.', 2, 12]
 ];
 
 // Import products into database
 // Prepare statement
-$stmt = $mysqli->prepare("INSERT INTO products (product_title, product_description, items_available) VALUES (?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO products (product_title, product_description, product_category, items_available) VALUES (?, ?, ?, ?)");
 
 // Count number of imported products
 $total_products_imported = 0;
@@ -52,9 +83,10 @@ $total_products_imported = 0;
 foreach ($product_rows as $product_row) {
     $product_title = $product_row[0];
     $product_description = $product_row[1];
-    $items_available = $product_row[2];
+    $product_category = $product_row[2];
+    $items_available = $product_row[3];
 
-    $stmt->bind_param('ssi',$product_title,$product_description, $items_available);
+    $stmt->bind_param('ssii',$product_title,$product_description, $product_category, $items_available);
     if ($stmt->execute()) {
         echo "Product {$product_title} has been successfully imported into database.\r\n";
     }
