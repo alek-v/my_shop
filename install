@@ -26,6 +26,7 @@ $products_table = "CREATE TABLE products( ".
     "product_title VARCHAR(255) NOT NULL, ".
     "product_description TEXT NOT NULL, ".
     "product_category VARCHAR(255), ".
+    "product_price INT NOT NULL, ".
     "items_available INT, ".
     "PRIMARY KEY ( product_id )) " .
     "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
@@ -65,17 +66,17 @@ if ($stmt->execute()) {
 
 // List of the products
 $product_rows = [
-    ['New Look long sleeve poplin shirt in white', 'Resistant to wrinkling and easier to iron.', 1, 15],
-    ['Topman quilted overshirt in black', 'Smooth woven fabric.', 1, 6],
-    ['Men\'s V-Neck Shirt', 'V-neck shirt from a new collection.', 1, 11],
-    ['Straight Fit Pants', 'Straight fit pants. Five pockets. Washed effect.', 2, 43],
-    ['Tapered Fit Pants', 'Pants with elastic waistband. Front pockets and back patch pockets.', 2, 11],
-    ['Cargo Pants', 'Pants made of textured cotton fabric. Front patch pockets and back welt pockets. Multi-functional pockets at legs.', 2, 12]
+    ['New Look long sleeve poplin shirt in white', 'Resistant to wrinkling and easier to iron.', 1, 32, 15],
+    ['Topman quilted overshirt in black', 'Smooth woven fabric.', 1, 43, 6],
+    ['Men\'s V-Neck Shirt', 'V-neck shirt from a new collection.', 1, 46, 11],
+    ['Straight Fit Pants', 'Straight fit pants. Five pockets. Washed effect.', 2, 38, 43],
+    ['Tapered Fit Pants', 'Pants with elastic waistband. Front pockets and back patch pockets.', 2, 65, 11],
+    ['Cargo Pants', 'Pants made of textured cotton fabric. Front patch pockets and back welt pockets. Multi-functional pockets at legs.', 2, 56, 12]
 ];
 
 // Import products into database
 // Prepare statement
-$stmt = $mysqli->prepare("INSERT INTO products (product_title, product_description, product_category, items_available) VALUES (?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO products (product_title, product_description, product_category, product_price, items_available) VALUES (?, ?, ?, ?, ?)");
 
 // Count number of imported products
 $total_products_imported = 0;
@@ -84,9 +85,10 @@ foreach ($product_rows as $product_row) {
     $product_title = $product_row[0];
     $product_description = $product_row[1];
     $product_category = $product_row[2];
-    $items_available = $product_row[3];
+    $product_price = $product_row[3];
+    $items_available = $product_row[4];
 
-    $stmt->bind_param('ssii',$product_title,$product_description, $product_category, $items_available);
+    $stmt->bind_param('ssiii',$product_title,$product_description, $product_category, $product_price, $items_available);
     if ($stmt->execute()) {
         echo "Product {$product_title} has been successfully imported into database.\r\n";
     }
