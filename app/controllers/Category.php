@@ -11,4 +11,16 @@ class Category extends Controller {
         // Pass data from the model to the view
         return $this->view($model->index());
     }
+
+    /**
+     * Check if category exist
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call(string $name, array $arguments): mixed
+    {
+
+    }
 }

@@ -14,18 +14,21 @@ class Start {
         $url = $this->parseUrl();
 
         // Find a controller
-        if (isset($url[1]) && !empty($url[1]) && file_exists(BASEDIR . 'app/controllers/' . ucfirst($url[1]) . '.php')) {
-            $this->controller = $url[1];
-        }
+        if (isset($url[0]) && !empty($url[0]) && file_exists(BASEDIR . 'app/controllers/' . ucfirst($url[0]) . '.php')) {
+            $this->controller = $url[0];
 
+            // Remove data from the array
+            unset($url[0]);
+        }
+        var_dump($url);exit;
         // Load controller
-        require BASEDIR . 'app/controllers/' . $this->controller . '.php';
+        require BASEDIR . 'app/controllers/' . ucfirst($this->controller) . '.php';
 
         $controller = new $this->controller;
 
         // Find a page name
-        if (isset($url[2]) && !empty($url[2]) && method_exists($controller, $url[2])) {
-            $this->page = $url[2];
+        if (isset($url[1]) && !empty($url[1]) && method_exists($controller, $url[1])) {
+            $this->page = $url[1];
         }
 
         // Put page name in a variable, so we can call this method below
