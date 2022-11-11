@@ -4,5 +4,8 @@
       "App\\Classes\\": "app/classes",
       "App\\Traits\\": "app/traits"
     }
+  },
+  "require": {
+    "pimple/pimple": "^3.5"
   }
 }
