@@ -1,8 +1,20 @@
 <?php
 
 namespace App\Classes;
+use Pimple\Container;
 
 abstract class Controller {
+    protected Container $container;
+
+    public function __construct()
+    {
+        $container = new Container();
+        $container['config'] = new Configuration();
+        $container['database'] = fn() => new Database("mysql:host=" . $this->container['config']->getParameter('DBHOSTNAME') . ";dbname=" . $this->container['config']->getParameter('DBNAME'), $this->container['config']->getParameter('DBUSERNAME'), $this->container['config']->getParameter('DBPASSWORD'));
+
+        $this->container = $container;
+    }
+
     /**
      * Instantiate and return model object
      *
@@ -14,7 +26,7 @@ abstract class Controller {
         require BASEDIR . 'app/models/' . $model . '.php';
 
         // Instantiate model object
-        return new $model();
+        return new $model($this->container);
     }
 
     /**

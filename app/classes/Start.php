@@ -20,7 +20,7 @@ class Start {
             // Remove data from the array
             unset($url[0]);
         }
-        var_dump($url);exit;
+
         // Load controller
         require BASEDIR . 'app/controllers/' . ucfirst($this->controller) . '.php';
 

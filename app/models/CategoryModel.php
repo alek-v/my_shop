@@ -1,6 +1,8 @@
 <?php
 
-class CategoryModel {
+use App\Classes\Model;
+
+class CategoryModel extends Model {
     /**
      * Return homepage data in array
      *

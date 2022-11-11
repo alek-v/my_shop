@@ -1,6 +1,8 @@
 <?php
 
-class PageModel {
+use App\Classes\Model;
+
+class PageModel extends Model {
     /**
      * Return homepage data in array
      *

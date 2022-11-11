@@ -21,6 +21,6 @@ class Category extends Controller {
      */
     public function __call(string $name, array $arguments): mixed
     {
-
+        // Check if category exist
     }
 }
