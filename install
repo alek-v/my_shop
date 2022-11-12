@@ -38,6 +38,7 @@ if ($mysqli->query($products_table)) {
 $category_table = "CREATE TABLE category( ".
     "category_id INT NOT NULL AUTO_INCREMENT, ".
     "category_title VARCHAR(255) NOT NULL, ".
+    "nice_name VARCHAR(255) NOT NULL, ".
     "PRIMARY KEY ( category_id )) " .
     "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 if ($mysqli->query($category_table)) {
@@ -48,18 +49,20 @@ echo "Importing data into tables...\r\n";
 sleep(2);
 
 // Import product categories
-$stmt = $mysqli->prepare("INSERT INTO category (category_title) VALUES (?)");
+$stmt = $mysqli->prepare("INSERT INTO category (category_title, nice_name) VALUES (?, ?)");
 
-// Man's shirts category
-$category_title = 'Man\'s Shirts';
-$stmt->bind_param('s', $category_title);
+// Men's shirts category
+$category_title = 'Men\'s Shirts';
+$category_nice_name = 'mens_shirts';
+$stmt->bind_param('ss', $category_title, $category_nice_name);
 if ($stmt->execute()) {
-    echo "Category Man\'s Shirts has been successfully imported into database.\r\n";
+    echo "Category Men\'s Shirts has been successfully imported into database.\r\n";
 }
 
 // Men's pants category
 $category_title = 'Men\'s Pants';
-$stmt->bind_param('s', $category_title);
+$category_nice_name = 'mens_pants';
+$stmt->bind_param('ss', $category_title, $category_nice_name);
 if ($stmt->execute()) {
     echo "Category Men\'s Pants has been successfully imported into database.\r\n";
 }
