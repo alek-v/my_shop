@@ -34,7 +34,10 @@
             </form>
         </div>
     </header>
-
+    <!-- list of the products -->
+    <div class="container">
+        {@products}}
+    </div>
     <!-- FOOTER -->
     <footer class="container">
         <p class="float-end"><a href="#">Back to top</a></p>

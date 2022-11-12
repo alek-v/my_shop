@@ -34,6 +34,6 @@ class Start {
         // Put page name in a variable, so we can call this method below
         $page_to_call = $this->page;
 
-        echo $controller->$page_to_call();
+        echo $controller->$page_to_call(array_values($url));
     }
 }

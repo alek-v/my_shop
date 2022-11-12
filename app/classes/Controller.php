@@ -5,6 +5,7 @@ use Pimple\Container;
 
 abstract class Controller {
     protected Container $container;
+    private Database $db;
 
     public function __construct()
     {
@@ -13,6 +14,7 @@ abstract class Controller {
         $container['database'] = fn() => new Database("mysql:host=" . $this->container['config']->getParameter('DBHOSTNAME') . ";dbname=" . $this->container['config']->getParameter('DBNAME'), $this->container['config']->getParameter('DBUSERNAME'), $this->container['config']->getParameter('DBPASSWORD'));
 
         $this->container = $container;
+        $this->db = $this->container['database'];
     }
 
     /**
