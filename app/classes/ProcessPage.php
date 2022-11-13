@@ -14,6 +14,9 @@ class ProcessPage {
         // Load page template
         $this->getViewTemplate();
 
+        // Include page elements
+        $this->includeElements();
+
         // Apply content from the database
         $this->processData();
     }
@@ -41,6 +44,24 @@ class ProcessPage {
     {
         foreach($this->content as $key => $val) {
             $this->ready_page = str_replace("{@$key}}", $val, $this->ready_page);
+        }
+    }
+
+    /**
+     * Include page elements (header, footer, sidebar...)
+     *
+     * @return void
+     */
+    private function includeElements(): void
+    {
+        // Elements to include
+        preg_match_all('/{@include_element\[(.*)\]}}/', $this->ready_page, $matches);
+
+        // Get contents of the element, set key and value
+        foreach($matches[1] as $element) {
+            // Set key and element content
+            $element_content = file_get_contents(BASEDIR . 'app/view/page_elements/' . $element . '.php');
+            $this->content['include_element[' . $element . ']'] = $element_content;
         }
     }
 
