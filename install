@@ -56,7 +56,7 @@ $category_title = 'Men\'s Shirts';
 $category_nice_name = 'mens_shirts';
 $stmt->bind_param('ss', $category_title, $category_nice_name);
 if ($stmt->execute()) {
-    echo "Category Men\'s Shirts has been successfully imported into database.\r\n";
+    echo "Category Men's Shirts has been successfully imported into database.\r\n";
 }
 
 // Men's pants category
@@ -64,7 +64,7 @@ $category_title = 'Men\'s Pants';
 $category_nice_name = 'mens_pants';
 $stmt->bind_param('ss', $category_title, $category_nice_name);
 if ($stmt->execute()) {
-    echo "Category Men\'s Pants has been successfully imported into database.\r\n";
+    echo "Category Men's Pants has been successfully imported into database.\r\n";
 }
 
 // List of the products
@@ -99,4 +99,4 @@ foreach ($product_rows as $product_row) {
     $total_products_imported++;
 }
 
-echo "Total products imported: {$total_products_imported}\r\n";
+echo "Total products imported: {stripslashes($total_products_imported)}\r\n";
