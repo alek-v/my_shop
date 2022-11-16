@@ -26,7 +26,9 @@ class CategoryModel extends Model {
 
         $data['content']['products'] = '';
         foreach ($products as $product) {
-            $data['content']['products'] .= '<p>' . $product['product_title'] . '</p>';
+            $data['content']['products'] .= '<div class="product-container item">
+                <p><a href="/product/' . $product['product_id'] . '">' . $product['product_title'] . '</a></p>
+                </div>';
         }
 
         return $data;

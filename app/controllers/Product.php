@@ -2,7 +2,7 @@
 
 use App\Classes\Controller;
 
-class Category extends Controller {
+class Product extends Controller {
     /**
      * Return page content
      *
@@ -12,9 +12,9 @@ class Category extends Controller {
     public function index(?array $params): string
     {
         // Instantiate the model
-        $model = $this->model('CategoryModel');
+        $model = $this->model('ProductModel');
 
-        // Pass data from the model to the view
-        return $this->view($model->index($params[0]));
+        // Pass data to the view
+        return $this->view($model->showProduct($params));
     }
 }

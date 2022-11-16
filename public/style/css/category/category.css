@@ -1,0 +1,19 @@
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+}
+.product-container .item {
+  flex: 0 0 350px;
+  padding: 20px;
+  background: cyan;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .product-container .item {
+    flex: 0 0 279px;
+  }
+}
+
+/*# sourceMappingURL=category.css.map */
