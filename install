@@ -99,4 +99,4 @@ foreach ($product_rows as $product_row) {
     $total_products_imported++;
 }
 
-echo "Total products imported: {$total_products_imported}\r\n";
+echo "\r\nTotal products imported: {$total_products_imported}\r\n";
