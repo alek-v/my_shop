@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\Model;
+use App\Classes\ProcessPage;
 
 class CategoryModel extends Model {
     /**
@@ -26,9 +27,19 @@ class CategoryModel extends Model {
 
         $data['content']['products'] = '';
         foreach ($products as $product) {
-            $data['content']['products'] .= '<div class="product-container item">
-                <p><a href="/product/' . $product['product_id'] . '">' . $product['product_title'] . '</a></p>
-                </div>';
+            // Data to put in category_elements/category_item template
+            $product_data = [
+                'product_link' => '<a href="/product/' . $product['product_id'] . '">' . $product['product_title'] . '</a>',
+                'product_address' => '/product/' . $product['product_id'],
+                'product_name' => $product['product_title'],
+                'product_image_location' => '/upload/products/' . $product['product_image'],
+                'product_price' => '$' . $product['product_price'] . ' USD'
+            ];
+            // Create product data from the template
+            $current_product = new ProcessPage('category_elements/category_item', $product_data);
+
+            // Add product to the list of the products
+            $data['content']['products'] .= $current_product->output();
         }
 
         return $data;
