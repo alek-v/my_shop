@@ -13,8 +13,16 @@
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
+  .product-container {
+    display: block;
+  }
   .product-container .item {
-    flex: 0 0 279px;
+    margin: 25px 0px;
+    text-align: center;
+  }
+  .product-container .item img {
+    max-width: 240px;
+    height: auto;
   }
 }
 
