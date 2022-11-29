@@ -1,7 +1,7 @@
 .product-container {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  margin: 0px 10px;
 }
 .product-container .item {
   display: block;
@@ -10,10 +10,6 @@
   border-radius: 10px;
   max-width: 350px;
   padding: 20px;
-}
-
-footer {
-  margin: 60px 0px 40px 0px;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

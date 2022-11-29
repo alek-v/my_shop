@@ -20,7 +20,10 @@ class ProductModel extends Model {
         $page_data['page_view'] = 'product';
         $page_data['content'] = array(
             'title' => $product_data['product_title'],
-            'product_name' => $product_data['product_title']
+            'product_name' => $product_data['product_title'],
+            'product_image' => $product_data['product_image'],
+            'product_description' => $product_data['product_description'],
+            'product_price' => $product_data['product_price']
         );
 
         return $page_data;
