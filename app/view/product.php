@@ -7,6 +7,29 @@
     <link href="/style/css/site/site.css" rel="stylesheet" />
     <link href="/style/css/product/product.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script>
+        function AddToCart() {
+            let productId = document.getElementById("product_id").value;
+            let productQuantity = document.getElementById("product_quantity").value;
+
+            const product = {
+                product_id: parseInt(productId),
+                product_quantity: parseInt(productQuantity)
+            }
+
+            const req = new XMLHttpRequest();
+            req.open('POST', '/cart/add');
+            req.setRequestHeader("Content-Type", "application/json");
+            req.addEventListener('load', function() {
+                if (req.readyState === 4) {
+                    document.getElementById('cart-output').textContent = req.responseText;
+                } else {
+                    console.log("Request error");
+                }
+            });
+            req.send(JSON.stringify(product));
+        };
+    </script>
 </head>
 <body>
     <!-- header -->
@@ -25,7 +48,25 @@
                     <p>${@product_price}}</p>
                 </div>
                 <div class="row mt-4 p-3 border-bottom">
-                    <p>Add to cart</p>
+                    <p>
+                        <form action="/cart/add" method="post" class="form-control">
+                            <select name="product_quantity" id="product_quantity" class="form-select mb-3 w-auto">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <input type="hidden" id="product_id" name="product_id" value="{@product_id}}" />
+                            <button id="add-to-cart" onclick="AddToCart(); return false;" class="btn btn-primary">Add to cart</button>
+                            <div id="cart-output"></div>
+                        </form>
+                    </p>
                 </div>
                 <div class="row mt-4 p-3">
                     <p>{@product_description}}</p>
