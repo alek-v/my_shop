@@ -8,7 +8,7 @@ Shop created in PHP MVC. Every page has their own template and can be edited eas
 
 ## Features
 
-Product categories
+Product categories  
 Product page
 
 
@@ -35,5 +35,5 @@ Pimple
 
 ## ToDo List
 
-Add to cart
+Add to cart  
 Remove from the cart
