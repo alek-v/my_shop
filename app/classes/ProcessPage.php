@@ -9,7 +9,7 @@ class ProcessPage {
      * @param string $template
      * @param array $content
      */
-    public function __construct(private string $template, private array $content)
+    public function __construct(private readonly string $template, private array $content)
     {
         // Load page template
         $this->getViewTemplate();
