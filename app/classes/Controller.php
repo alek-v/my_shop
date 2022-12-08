@@ -20,10 +20,10 @@ abstract class Controller {
     /**
      * Instantiate and return model object
      *
-     * @param $model
+     * @param string $model
      * @return object
      */
-    protected function model($model): object
+    protected function model(string $model): object
     {
         require BASEDIR . 'app/models/' . $model . '.php';
 
