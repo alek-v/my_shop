@@ -2,6 +2,7 @@
 
 use App\Classes\Model;
 use App\Classes\Cart;
+use App\Classes\ProcessPage;
 use Pimple\Container;
 
 class CartModel extends Model {
@@ -56,9 +57,27 @@ class CartModel extends Model {
      */
     public function index(): array
     {
-        $page_data['page_view'] = 'cart';
+        // Items from the cart
+        $all_items = $this->cart->show();
+
+        // Here we will store prepared item to show on the page
+        $cart_items = '';
+
+        foreach ($all_items as $item) {
+            // Get data from the database
+            $product_data = $this->db->selectData('products', ['product_id' => $item['product_id']])[0];
+
+            // Prepare data for template
+            $content['product_title'] = $product_data['product_title'];
+            $content['product_quantity'] = $item['product_quantity'];
+
+            $prepare_item = new ProcessPage('cart/cart_item', $content);
+            $cart_items .= $prepare_item->output();
+        }
+
+        $page_data['page_view'] = 'cart/cart';
         $page_data['content'] = array(
-            'cart_items' => json_encode($this->cart->show())
+            'cart_items' => $cart_items
         );
 
         return $page_data;

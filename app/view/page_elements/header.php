@@ -5,6 +5,9 @@
                     <li class="nav-item"><a href="/category/mens_shirts" class="nav-link link-dark px-2">Men's Shirts</a></li>
                     <li class="nav-item"><a href="/category/mens_pants" class="nav-link link-dark px-2">Men's Pants</a></li>
                 </ul>
+                <ul class="nav border rounded" style="margin-right: 30px;">
+                    <li class="nav-item"><a href="/cart" class="nav-link link-dark px-2">Cart</a></li>
+                </ul>
                 <ul class="nav">
                     <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
                     <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Sign up</a></li>
