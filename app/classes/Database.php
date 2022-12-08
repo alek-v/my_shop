@@ -29,7 +29,7 @@ class Database extends PDO {
 
             $where_keys = '';
             foreach(array_keys($where) as $bind_key) {
-                if (!empty($where_keys)) $where_keys .= ', ';
+                if (!empty($where_keys)) $where_keys .= ' AND ';
 
                 $where_keys .= $bind_key . '=:' . $bind_key;
             }
