@@ -27,9 +27,7 @@ class Start {
         $controller = new $this->controller;
 
         // Find a page name
-        if (isset($url[1]) && !empty($url[1]) && method_exists($controller, $url[1])) {
-            $this->page = $url[1];
-        }
+        if (isset($url[1]) && !empty($url[1]) && method_exists($controller, $url[1])) $this->page = $url[1];
 
         // Put page name in a variable, so we can call this method below
         $page_to_call = $this->page;

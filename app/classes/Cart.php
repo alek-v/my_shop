@@ -45,6 +45,13 @@ class Cart {
     public function remove()
     {}
 
-    public function delete()
-    {}
+    /**
+     * Delete all items in the cart
+     *
+     * @return void
+     */
+    public function delete():void
+    {
+        $this->cart()->delete();
+    }
 }

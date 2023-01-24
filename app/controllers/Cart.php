@@ -3,19 +3,42 @@
 use App\Classes\Controller;
 
 class Cart extends Controller {
-    public function index()
+    /**
+     * Show cart
+     *
+     * @return void
+     */
+    public function index(): void
     {
         $model = $this->model('CartModel');
 
         echo $this->view($model->index());
     }
 
-    public function add()
+    /**
+     * Add item to the cart
+     *
+     * @return void
+     */
+    public function add():void
     {
         // Instantiate the model
         $model = $this->model('CartModel');
 
         // Add item to the cart
         echo $model->add();
+    }
+
+    /**
+     * Delete items in the cart
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        // Instantiate the model
+        $model = $this->model('CartModel');
+
+        $model->delete();
     }
 }

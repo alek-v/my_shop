@@ -12,13 +12,16 @@
 {@include_element[header]}}
 <!-- list of the products -->
 <div class="container">
-    <div class="row mb-3">
+    <div class="row mb-3{@display_option}}">
         <div class="col-4"></div>
         <div class="col-1">
             Qty
         </div>
     </div>
     {@cart_items}}
+    <div class="mt-5{@display_option}}">
+        <a href="/cart/delete" class="btn btn-danger">Clear the cart</a>
+    </div>
 </div>
 <!-- footer -->
 {@include_element[footer]}}

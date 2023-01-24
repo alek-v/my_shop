@@ -75,11 +75,30 @@ class CartModel extends Model {
             $cart_items .= $prepare_item->output();
         }
 
+        // Set d-none class in the page when cart is empty
+        $display_items = empty($cart_items) ? ' d-none' : '';
+        // Show information when cart is empty
+        if (empty($cart_items)) $cart_items = 'Cart is empty';
+
         $page_data['page_view'] = 'cart/cart';
         $page_data['content'] = array(
-            'cart_items' => $cart_items
+            'cart_items' => $cart_items,
+            'display_option' => $display_items
         );
 
         return $page_data;
+    }
+
+    /**
+     * Delete all items in the cart
+     *
+     * @return void
+     */
+    public function delete():void
+    {
+        $this->cart()->delete();
+
+        header('Location: /cart');
+        exit;
     }
 }

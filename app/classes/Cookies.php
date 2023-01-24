@@ -60,6 +60,20 @@ class Cookies {
         return setcookie($this->cookie_name, serialize($this->cookie_data), time() + 60*100000, '/');
     }
 
-    public function delete()
-    {}
+    /**
+     * Delete cookie
+     *
+     * @return bool
+     */
+    public function delete(): bool
+    {
+        if (isset($_COOKIE[$this->cookie_name])) {
+            unset($_COOKIE[$this->cookie_name]);
+            setcookie($this->cookie_name, null, -1, '/');
+
+            return true;
+        }
+
+        return false;
+    }
 }
