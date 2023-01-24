@@ -38,6 +38,4 @@ Pimple
   
 ## ToDo List  
 
-Show cart  
-Remove item from the cart  
-Empty shopping cart
+Remove item in the cart  
