@@ -19,7 +19,7 @@
 
             const req = new XMLHttpRequest();
             req.open('POST', '/cart/add');
-            req.setRequestHeader("Content-Type", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
             req.addEventListener('load', function() {
                 if (req.readyState === 4) {
                     document.getElementById('cart-output').textContent = req.responseText;

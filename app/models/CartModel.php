@@ -59,9 +59,12 @@ class CartModel extends Model {
     {
         // Items from the cart
         $all_items = $this->cart->show();
-
+//var_dump($all_items);exit;
         // Here we will store prepared item to show on the page
         $cart_items = '';
+
+        // Item ID so we can remove item from the cart
+        $item_id = 0;
 
         foreach ($all_items as $item) {
             // Get data from the database
@@ -70,9 +73,12 @@ class CartModel extends Model {
             // Prepare data for template
             $content['product_title'] = $product_data['product_title'];
             $content['product_quantity'] = $item['product_quantity'];
+            $content['item_id'] = $item_id;
 
             $prepare_item = new ProcessPage('cart/cart_item', $content);
             $cart_items .= $prepare_item->output();
+
+            $item_id++;
         }
 
         // Set d-none class in the page when cart is empty
@@ -100,5 +106,21 @@ class CartModel extends Model {
 
         header('Location: /cart');
         exit;
+    }
+
+    /**
+     * Remove item in the cart
+     *
+     * @return void
+     */
+    public function remove(): void
+    {
+        // Receive json object
+        $cart_item = json_decode(file_get_contents("php://input"), true);
+
+        // Item ID to remove from the array
+        $item_id = $cart_item['item_id'];
+
+        $this->cart()->remove($item_id);
     }
 }

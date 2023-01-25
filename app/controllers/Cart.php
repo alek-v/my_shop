@@ -41,4 +41,17 @@ class Cart extends Controller {
 
         $model->delete();
     }
+
+    /**
+     * Remove item in the cart
+     *
+     * @return void
+     */
+    public function remove(): void
+    {
+        // Instantiate the model
+        $model = $this->model('CartModel');
+
+        $model->remove();
+    }
 }

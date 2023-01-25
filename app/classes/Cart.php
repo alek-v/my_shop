@@ -42,9 +42,6 @@ class Cart {
         return $this->cart()->add($item);
     }
 
-    public function remove()
-    {}
-
     /**
      * Delete all items in the cart
      *
@@ -53,5 +50,16 @@ class Cart {
     public function delete():void
     {
         $this->cart()->delete();
+    }
+
+    /**
+     * Remove item in the cart
+     *
+     * @param int $id
+     * @return void
+     */
+    public function remove(int $id): void
+    {
+        $this->cart()->remove($id);
     }
 }

@@ -76,4 +76,27 @@ class Cookies {
 
         return false;
     }
+
+    /**
+     * Remove item in the cart
+     *
+     * @param int $id
+     * @return void
+     */
+    public function remove(int $id): void
+    {
+        // Remove cookie item from the array
+        unset($this->cookie_data[$id]);
+
+        // Sort array with a new key values
+        $this->cookie_data = array_values($this->cookie_data);
+
+        if (empty($this->cookie_data)) {
+            $this->delete();
+            return;
+        }
+
+        // Update cookie
+        $this->update();
+    }
 }
