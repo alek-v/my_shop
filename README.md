@@ -11,8 +11,9 @@ Shop created in PHP MVC. Every page has their own template and can be edited eas
 
 Product categories  
 Product page  
-Add to cart with select quantity option  
-&nbsp;&nbsp;&nbsp;&nbsp;<sub>For "add to cart" option we use AJAX, user will not leave the page after adding to the cart</sub>
+Add to the cart with select quantity option  
+&nbsp;&nbsp;&nbsp;&nbsp;<sub>For "add to cart" option we use AJAX, user will not leave the page after adding to the cart</sub>  
+Shopping cart with option to remove an item, and option to empty the cart
   
   
   
@@ -31,11 +32,5 @@ php install database_hostname database_username database_password database_name
   
   
 ## Dev Dependencies  
-  
-Pimple  
-  
-  
-  
-## ToDo List  
 
-Remove item in the cart  
+Pimple  
