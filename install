@@ -1,19 +1,19 @@
 <?php
-
 /**
  * How to run this script
  * Open terminal and run a command written below:
- * php install database_hostname database_username database_password database_name
+ * php install
  */
 
-// Database settings
-// Use 127.0.0.1 for hostname if localhost doesn't work
-$db_hostname = $argv[1];
-$db_username = $argv[2];
-$db_password = $argv[3];
-$db_database = $argv[4];
+use App\Classes\Configuration;
 
-$mysqli = new mysqli($db_hostname, $db_username, $db_password, $db_database);
+require 'vendor/autoload.php';
+
+$config = new Configuration('.env');
+
+// Database connection
+// Use 127.0.0.1 for hostname in case localhost doesn't work
+$mysqli = new mysqli($config->getParameter('DBHOSTNAME'), $config->getParameter('DBUSERNAME'), $config->getParameter('DBPASSWORD'), $config->getParameter('DBNAME'));
 $mysqli->set_charset('utf8mb4');
 
 echo "Creating tables...\r\n";

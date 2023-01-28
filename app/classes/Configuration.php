@@ -5,10 +5,10 @@ namespace App\Classes;
 class Configuration {
     private array $configuration;
 
-    public function __construct()
+    public function __construct(private string $config_file = '../.env')
     {
         // Get data from the .env
-        $config_data = file('../.env');
+        $config_data = file($this->config_file);
 
         foreach($config_data as $config) {
             $current_option = explode('=', $config);
