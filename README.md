@@ -24,7 +24,7 @@ Shopping cart with option to remove an item, and option to empty the cart
 composer install
 ```  
 2. Enter database data in the .env file  
-3. Create database, import sample products, and product categories  
+3. Create database, import sample products, and product categories:  
 ```bash  
 php install
 ```
