@@ -59,26 +59,21 @@ class CartModel extends Model {
     {
         // Items from the cart
         $all_items = $this->cart->show();
-//var_dump($all_items);exit;
+
         // Here we will store prepared item to show on the page
         $cart_items = '';
 
-        // Item ID so we can remove item from the cart
-        $item_id = 0;
-
-        foreach ($all_items as $item) {
+        foreach ($all_items as $key => $item) {
             // Get data from the database
             $product_data = $this->db->selectData('products', ['product_id' => $item['product_id']])[0];
 
             // Prepare data for template
             $content['product_title'] = $product_data['product_title'];
             $content['product_quantity'] = $item['product_quantity'];
-            $content['item_id'] = $item_id;
+            $content['item_id'] = $key;
 
             $prepare_item = new ProcessPage('cart/cart_item', $content);
             $cart_items .= $prepare_item->output();
-
-            $item_id++;
         }
 
         // Set d-none class in the page when cart is empty
